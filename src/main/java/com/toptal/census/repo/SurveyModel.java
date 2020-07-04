@@ -8,6 +8,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import com.toptal.census.domain.types.DraftSurvey;
+import com.toptal.census.domain.types.Result;
 import com.toptal.census.domain.types.Survey;
 import com.toptal.census.domain.types.SurveyDescription;
 import com.toptal.census.domain.types.SurveyId;
@@ -68,12 +69,13 @@ public class SurveyModel {
     this.description = description;
   }
 
-  public Survey toDomainModel() {
+  public Result<Survey, String> toDomainModel() {
     if (STATUS_DRAFT.equals(status)) {
-      return new DraftSurvey(new SurveyId(id), new SurveySlug(slug), new SurveyName(name),
+      var survey = new DraftSurvey(new SurveyId(id), new SurveySlug(slug), new SurveyName(name),
           new SurveyDescription(description));
+      return Result.of(survey);
     } else {
-      throw new IllegalArgumentException("Unknown survey status: " + status);
+      return Result.error("Unknown survey status: " + status);
     }
   }
 }
