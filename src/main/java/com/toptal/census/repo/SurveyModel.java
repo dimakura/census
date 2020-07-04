@@ -69,7 +69,11 @@ public class SurveyModel {
     this.description = description;
   }
 
+  // TODO:: result is silly here: this transformation should always succeed
   public Result<Survey, String> toDomainModel() {
+    // XXX: this is not good!
+    // if we introduce a new survey status, we should rememeber to add handler here
+    // can we enforce this on compile time?
     if (STATUS_DRAFT.equals(status)) {
       var survey = new DraftSurvey(new SurveyId(id), new SurveySlug(slug), new SurveyName(name),
           new SurveyDescription(description));
