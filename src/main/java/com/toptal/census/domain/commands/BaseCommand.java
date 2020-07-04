@@ -6,7 +6,7 @@ import java.util.List;
 import com.toptal.census.functional.Validable;
 import com.toptal.census.functional.ValidationError;
 
-public abstract class WithFields implements Validable {
+public abstract class BaseCommand implements Validable {
   public abstract Field[] getFields();
 
   @Override

@@ -5,7 +5,7 @@ import com.toptal.census.domain.types.SurveyName;
 import com.toptal.census.domain.types.SurveySlug;
 import com.toptal.census.repo.SurveyModel;
 
-public final class CreateSurveyCommand extends WithFields {
+public final class CreateSurveyCommand extends BaseCommand {
   private final SurveySlug slug;
   private final SurveyName name;
   private final SurveyDescription description;
