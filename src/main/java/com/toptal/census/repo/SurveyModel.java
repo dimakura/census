@@ -8,12 +8,12 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import com.toptal.census.domain.types.DraftSurvey;
-import com.toptal.census.domain.types.Result;
 import com.toptal.census.domain.types.Survey;
 import com.toptal.census.domain.types.SurveyDescription;
 import com.toptal.census.domain.types.SurveyId;
 import com.toptal.census.domain.types.SurveyName;
 import com.toptal.census.domain.types.SurveySlug;
+import com.toptal.census.functional.Result;
 
 @Entity
 @Table(name = "surveys")

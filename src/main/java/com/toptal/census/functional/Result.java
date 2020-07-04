@@ -1,4 +1,4 @@
-package com.toptal.census.domain.types;
+package com.toptal.census.functional;
 
 public final class Result<S, E> {
   private final S success;

@@ -3,10 +3,21 @@ package com.toptal.census.domain.types;
 import java.util.ArrayList;
 import java.util.List;
 
-abstract class SimpleType {
+import com.toptal.census.functional.Validable;
+import com.toptal.census.functional.ValidationError;
+
+abstract class SimpleType implements Validable {
   private final List<ValidationError> errors = new ArrayList<>();
   private boolean validated;
 
+  @Override
+  public final boolean isValid() {
+    if (!validated)
+      validate();
+    return errors.isEmpty();
+  }
+
+  @Override
   public final ValidationError[] getErrors() {
     if (!validated)
       validate();
@@ -19,12 +30,6 @@ abstract class SimpleType {
 
   protected final void add(String errorMessage) {
     this.add(new ValidationError(errorMessage));
-  }
-
-  public final boolean isValid() {
-    if (!validated)
-      validate();
-    return errors.isEmpty();
   }
 
   protected final void validate() {
