@@ -16,7 +16,9 @@ public class SurveyFinder {
   }
 
   public SurveyListItemDTO[] getSurveys() {
-    return Arrays.stream(repo.getSurveys()).parallel().map(s -> new SurveyListItemDTO(s)).sequential()
-        .toArray(SurveyListItemDTO[]::new);
+    var data = repo.getSurveys();
+    return Arrays.stream(data).parallel()
+      .map(s -> new SurveyListItemDTO(s))
+      .toArray(SurveyListItemDTO[]::new);
   }
 }
