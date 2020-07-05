@@ -6,17 +6,17 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import com.toptal.census.domain.types.Survey;
-import com.toptal.census.finders.SurveyFinderImpl;
+import com.toptal.census.dto.SurveyListItemDTO;
+import com.toptal.census.finders.SurveyFinder;
 
 @Path("/surveys")
 public class SurveysResource {
   @Inject
-  SurveyFinderImpl finder;
+  SurveyFinder finder;
 
   @GET
   @Produces(MediaType.APPLICATION_JSON)
-  public Survey[] index() {
+  public SurveyListItemDTO[] index() {
     return finder.getSurveys();
   }
 }

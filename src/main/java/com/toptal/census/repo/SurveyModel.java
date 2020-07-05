@@ -13,7 +13,6 @@ import com.toptal.census.domain.types.SurveyDescription;
 import com.toptal.census.domain.types.SurveyId;
 import com.toptal.census.domain.types.SurveyName;
 import com.toptal.census.domain.types.SurveySlug;
-import com.toptal.census.functional.Result;
 
 @Entity
 @Table(name = "surveys")
@@ -23,17 +22,17 @@ public class SurveyModel {
 
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "surveys_seq")
-  private int id;
+  private long id;
   private String status;
   private String slug;
   private String name;
   private String description;
 
-  public int getId() {
+  public long getId() {
     return id;
   }
 
-  public void setId(int id) {
+  public void setId(long id) {
     this.id = id;
   }
 
@@ -69,17 +68,15 @@ public class SurveyModel {
     this.description = description;
   }
 
-  // TODO:: result is silly here: this transformation should always succeed
-  public Result<Survey, String> toDomainModel() {
-    // XXX: this is not good!
+  public Survey toDomainModel() {
+    // XXX: this is not cool!
     // if we introduce a new survey status, we should rememeber to add handler here
     // can we enforce this on compile time?
     if (STATUS_DRAFT.equals(status)) {
-      var survey = new DraftSurvey(new SurveyId(id), new SurveySlug(slug), new SurveyName(name),
+      return new DraftSurvey(new SurveyId(id), new SurveySlug(slug), new SurveyName(name),
           new SurveyDescription(description));
-      return Result.of(survey);
     } else {
-      return Result.error("Unknown survey status: " + status);
+      throw new UnsupportedOperationException("Unknown status: " + status);
     }
   }
 }

@@ -1,13 +1,13 @@
 package com.toptal.census.domain.types;
 
 public final class SurveyId extends SimpleType {
-  private final Integer id;
+  private final Long id;
 
-  public SurveyId(int id) {
+  public SurveyId(long id) {
     this.id = id;
   }
 
-  public Integer getId() {
+  public Long getId() {
     return id;
   }
 
