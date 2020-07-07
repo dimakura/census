@@ -26,6 +26,7 @@ public final class CreateSurveyCommand extends BaseCommand {
     model.setSlug(slug.getSlug());
     model.setName(name.getName());
     model.setDescription(description.getDescription());
+    model.setStatus(SurveyModel.STATUS_DRAFT);
 
     return model;
   }
